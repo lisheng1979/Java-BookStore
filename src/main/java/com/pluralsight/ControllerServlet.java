@@ -50,6 +50,12 @@ public class ControllerServlet extends HttpServlet {
 
 		try {
 			switch(action) {
+				case "/edit":
+					showEditForm(request, response);
+					break;
+				case "/delete":
+					deleteBook(request, response);
+					break;
 				case "/admin":
 					 showBookAdmin(request, response);
            break;
@@ -69,6 +75,18 @@ public class ControllerServlet extends HttpServlet {
 		}
 	}
 
+	private void deleteBook(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
+	{
+		int id =Integer.parseInt(request.getParameter("id"));
+		bookDAO.deleteBook(id);
+		response.sendRedirect("list");
+	}
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+			throws ClassNotFoundException, SQLException, ServletException, IOException
+	{
+		
+	}
 	private void showBookAdmin(HttpServletRequest request, HttpServletResponse response)
 			throws ClassNotFoundException, SQLException, ServletException, IOException {
 		ArrayList<Book> books_list = bookDAO.listAllBooks();
