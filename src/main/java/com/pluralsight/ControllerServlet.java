@@ -85,8 +85,12 @@ public class ControllerServlet extends HttpServlet {
 	}
 
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
-			throws ClassNotFoundException, SQLException, ServletException, IOException {
-
+			throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		Book book = bookDAO.getBook(id);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/BookForm.jsp");
+		request.setAttribute("book", book);
+		requestDispatcher.forward(request, response);
 	}
 
 	private void showBookAdmin(HttpServletRequest request, HttpServletResponse response)
